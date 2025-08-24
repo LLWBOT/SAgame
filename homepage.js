@@ -28,8 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('play-button').addEventListener('click', () => {
-        const loadingScreen = document.getElementById('loading-screen');
+        // These two lines hide the buttons and show the loading screen
         const buttonGroup = document.querySelector('.button-group');
+        const loadingScreen = document.getElementById('loading-screen');
 
         buttonGroup.classList.add('hidden');
         loadingScreen.classList.remove('hidden');
@@ -68,8 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('leaderboard-button').addEventListener('click', () => {
         window.location.href = 'leaderboard.html';
     });
-    
-    // Add this new event listener for the logout button
+
     document.getElementById('logout-button').addEventListener('click', () => {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
