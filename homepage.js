@@ -9,6 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('user-name').textContent = `Welcome, ${username}`;
 
+    const fetchScore = async () => {
+        try {
+            const response = await axios.get('https://above-barbette-primellw-ba50ce72.koyeb.app/api/user/score', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            document.getElementById('user-score').textContent = `Points: ${response.data.points}`;
+        } catch (error) {
+            console.error('Failed to fetch user score:', error);
+            document.getElementById('user-score').textContent = 'Points: N/A';
+        }
+    };
+
+    fetchScore();
+
     document.getElementById('edit-button').addEventListener('click', async () => {
         const newUsername = prompt('Enter a new username:');
         if (newUsername) {
@@ -28,10 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('play-button').addEventListener('click', () => {
-        // These two lines hide the buttons and show the loading screen
-        const buttonGroup = document.querySelector('.button-group');
         const loadingScreen = document.getElementById('loading-screen');
-
+        const buttonGroup = document.querySelector('.button-group');
+        
         buttonGroup.classList.add('hidden');
         loadingScreen.classList.remove('hidden');
 
