@@ -1,8 +1,175 @@
+body {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Prevent body scroll */
+}
+
+/* Page containers */
+.container {
+    text-align: center;
+    padding: 2em;
+    border-radius: 10px;
+    background-color: #2b2b2b;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-width: 90%;
+}
+
+/* Game and UI text */
+.game-title {
+    font-size: 3em;
+    color: #e55;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 0.5em;
+}
+
+.user-info {
+    margin-bottom: 2em;
+}
+
+#user-name {
+    font-size: 1.5em;
+    display: inline-block;
+    margin-right: 0.5em;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.main-button {
+    background-color: #e55;
+    color: white;
+    border: none;
+    padding: 1em 2em;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.main-button:hover {
+    background-color: #c44;
+}
+
+#edit-button {
+    background-color: #444;
+    color: #f0f0f0;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#edit-button:hover {
+    background-color: #555;
+}
+
+/* Form and input fields */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.auth-form input {
+    padding: 0.8em;
+    font-size: 1em;
+    border: 1px solid #555;
+    background-color: #333;
+    color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.message {
+    margin-top: 1em;
+    font-size: 0.9em;
+}
+
+/* Utility classes */
 .hidden {
     display: none;
 }
-.message {
-    margin-top: 1em;
-    color: #e55;
-    font-size: 0.9em;
+
+/* Matchmaking loading screen */
+#loading-screen {
+    text-align: center;
+    padding: 2em;
+    background-color: #2b2b2b;
+    border-radius: 10px;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #e55;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* In-game UI */
+.hp-bar-container {
+    position: absolute;
+    top: 10px;
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-info span {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.hp-bar {
+    height: 20px;
+    width: 250px;
+    background-color: #333;
+    border: 2px solid #fff;
+}
+
+.player-hp {
+    background-color: #5e5;
+}
+
+.opponent-hp {
+    background-color: #e55;
+}
+
+/* Game Over screen */
+#game-over-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2em;
+    border-radius: 10px;
 }
