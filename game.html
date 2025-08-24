@@ -2,31 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow Assassins - Fight!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=portrait">
+    <title>Shadow Assassins</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body, html {
+            overscroll-behavior: none;
+            touch-action: none;
+        }
+        #game-canvas {
+            background-color: #000;
+            display: block;
+        }
+        .hp-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #f0f0f0;
+            margin-left: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="hp-bar-container">
         <div class="player-info">
-            <span id="opponent-name">Opponent</span>
-            <div class="hp-bar opponent-hp"></div>
+            <span id="player-name"></span>
+            <div class="hp-bar">
+                <div id="player-hp" class="player-hp" style="width: 100%;"></div>
+            </div>
+            <span id="player-hp-text" class="hp-text">100</span>
         </div>
         <div class="player-info">
-            <span id="player-name">You</span>
-            <div class="hp-bar player-hp"></div>
+            <span id="opponent-name"></span>
+            <div class="hp-bar">
+                <div id="opponent-hp" class="opponent-hp" style="width: 100%;"></div>
+            </div>
+            <span id="opponent-hp-text" class="hp-text">100</span>
         </div>
     </div>
     
-    <div id="controls">
-        </div>
+    <canvas id="game-canvas"></canvas>
 
     <div id="game-over-screen" class="hidden">
-        <h1 id="result-message"></h1>
-        <button id="home-button" class="main-button">Go Home</button>
+        <h2 id="game-over-message"></h2>
+        <button id="back-to-home-button" class="main-button">Back to Home</button>
     </div>
+
+    <button id="leave-button" class="main-button" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">Leave Game</button>
     
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
     <script src="game.js"></script>
 </body>
 </html>
