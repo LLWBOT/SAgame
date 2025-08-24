@@ -8,13 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Display the user's name on the page
     document.getElementById('user-name').textContent = `Welcome, ${username}`;
 
     document.getElementById('edit-button').addEventListener('click', async () => {
         const newUsername = prompt('Enter a new username:');
         if (newUsername) {
             try {
-                // We'll need a new backend endpoint for this
+                // This call requires Axios to be included in the homepage.html file
                 const response = await axios.post('YOUR_KOYEB_API_URL/api/update-username', { newUsername }, {
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -30,7 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('play-button').addEventListener('click', () => {
-        // This is where we'll start the WebSocket connection
+        // This is where the matchmaking logic will go
+        // It will initiate a WebSocket connection to the backend
         alert('Searching for a match...');
     });
 
