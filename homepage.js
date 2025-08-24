@@ -1,6 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('token');
+    
+    const playButton = document.getElementById('play-button');
+    const leaderboardButton = document.getElementById('leaderboard-button');
+    const logoutButton = document.getElementById('logout-button');
+    const stopMatchmakingButton = document.getElementById('stop-matchmaking-button'); // Get the new button
+    const loadingScreen = document.getElementById('loading-screen');
+    const buttonGroup = document.querySelector('.button-group');
 
     if (!token || !username) {
         window.location.href = 'index.html';
@@ -43,10 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.getElementById('play-button').addEventListener('click', () => {
-        const loadingScreen = document.getElementById('loading-screen');
-        const buttonGroup = document.querySelector('.button-group');
-        
+    playButton.addEventListener('click', () => {
+        // Hide the main buttons and show the loading screen
         buttonGroup.classList.add('hidden');
         loadingScreen.classList.remove('hidden');
 
@@ -79,13 +84,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.reload(); 
             }, 3000);
         };
+
+        // Add the stop matchmaking listener here
+        stopMatchmakingButton.addEventListener('click', () => {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.close(); // Close the WebSocket connection
+            }
+            // Reset the UI
+            loadingScreen.classList.add('hidden');
+            buttonGroup.classList.remove('hidden');
+            loadingScreen.innerHTML = `<p>Searching for an opponent...</p><div class="loader"></div><button id="stop-matchmaking-button" class="main-button" style="margin-top: 1em;">Cancel</button>`;
+        }, { once: true });
     });
 
-    document.getElementById('leaderboard-button').addEventListener('click', () => {
+    leaderboardButton.addEventListener('click', () => {
         window.location.href = 'leaderboard.html';
     });
 
-    document.getElementById('logout-button').addEventListener('click', () => {
+    logoutButton.addEventListener('click', () => {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
         window.location.href = 'index.html';
