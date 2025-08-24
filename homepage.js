@@ -28,42 +28,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('play-button').addEventListener('click', () => {
-        // Here's the WebSocket matchmaking logic
         const loadingScreen = document.getElementById('loading-screen');
         const buttonGroup = document.querySelector('.button-group');
 
         buttonGroup.classList.add('hidden');
         loadingScreen.classList.remove('hidden');
 
-        // Connect to your backend's WebSocket server
         const ws = new WebSocket('wss://above-barbette-primellw-ba50ce72.koyeb.app'); 
     
         ws.onopen = () => {
-            // Send the user's authentication token to the backend
             ws.send(JSON.stringify({ type: 'authenticate', token }));
         };
 
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
             if (data.type === 'matchFound') {
-                // When a match is found, redirect to the game page
                 loadingScreen.innerHTML = `<p>Match found with ${data.opponent}! Starting game...</p>`;
                 setTimeout(() => {
                     window.location.href = `game.html?opponent=${data.opponent}`;
                 }, 2000);
             } else if (data.type === 'status') {
-                // Update the loading screen with a status message
                 loadingScreen.querySelector('p').textContent = data.message;
             }
         };
 
         ws.onclose = () => {
-            // Handle disconnection
             console.log('WebSocket connection closed.');
         };
 
         ws.onerror = (error) => {
-            // Handle errors and show a message
             console.error('WebSocket error:', error);
             loadingScreen.innerHTML = '<p>Failed to connect to matchmaking service. Please try again.</p>';
             setTimeout(() => {
@@ -74,5 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('leaderboard-button').addEventListener('click', () => {
         window.location.href = 'leaderboard.html';
+    });
+    
+    // Add this new event listener for the logout button
+    document.getElementById('logout-button').addEventListener('click', () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        window.location.href = 'index.html';
     });
 });
