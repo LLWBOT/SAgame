@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Check for a token. If it exists, skip to the homepage.
     const token = localStorage.getItem('token');
     if (token) {
-        // In a real app, you'd verify the token first. For now, we'll assume it's valid.
         window.location.href = 'homepage.html';
     }
 
@@ -26,18 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
         signupForm.classList.add('hidden');
     });
 
-    // Handle Signup Form Submission
     signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const username = document.getElementById('signup-username').value;
         const password = document.getElementById('signup-password').value;
         
         try {
-            const response = await axios.post('YOUR_KOYEB_API_URL/api/signup', { username, password });
+            const response = await axios.post('https://above-barbette-primellw-ba50ce72.koyeb.app/api/signup', { username, password });
             signupMessage.textContent = 'Account created successfully! You can now log in.';
             signupMessage.style.color = '#5e5';
             setTimeout(() => {
-                window.location.reload(); // Reloads the page to show the login buttons again
+                window.location.reload(); 
             }, 2000);
         } catch (error) {
             signupMessage.textContent = error.response.data || 'Error creating account.';
@@ -45,18 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Handle Login Form Submission
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const username = document.getElementById('login-username').value;
         const password = document.getElementById('login-password').value;
 
         try {
-            const response = await axios.post('YOUR_KOYEB_API_URL/api/login', { username, password });
+            const response = await axios.post('https://above-barbette-primellw-ba50ce72.koyeb.app/api/login', { username, password });
             const token = response.data.token;
             localStorage.setItem('token', token);
             localStorage.setItem('username', username);
-            window.location.href = 'homepage.html'; // Redirect to the game homepage
+            window.location.href = 'homepage.html';
         } catch (error) {
             loginMessage.textContent = error.response.data || 'Invalid username or password.';
             loginMessage.style.color = '#e55';
