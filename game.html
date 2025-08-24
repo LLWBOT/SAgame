@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Assassins - Fight!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hp-bar-container">
+        <div class="player-info">
+            <span id="opponent-name">Opponent</span>
+            <div class="hp-bar opponent-hp"></div>
+        </div>
+        <div class="player-info">
+            <span id="player-name">You</span>
+            <div class="hp-bar player-hp"></div>
+        </div>
+    </div>
+    
+    <div id="controls">
+        </div>
+
+    <div id="game-over-screen" class="hidden">
+        <h1 id="result-message"></h1>
+        <button id="home-button" class="main-button">Go Home</button>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
