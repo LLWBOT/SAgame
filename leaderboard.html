@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - Shadow Assassins</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="game-title">Leaderboard</h1>
+        <table id="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+        <a href="homepage.html" class="main-button" style="margin-top: 2em;">Back to Home</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const tableBody = document.querySelector('#leaderboard-table tbody');
+            try {
+                // Replace with your actual Koyeb API URL
+                const response = await axios.get('YOUR_KOYEB_API_URL/api/leaderboard');
+                const players = response.data;
+                
+                players.forEach((player, index) => {
+                    const row = tableBody.insertRow();
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${player.username}</td>
+                        <td>${player.points}</td>
+                    `;
+                });
+            } catch (error) {
+                tableBody.innerHTML = '<tr><td colspan="3">Failed to load leaderboard.</td></tr>';
+                console.error('Leaderboard error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
