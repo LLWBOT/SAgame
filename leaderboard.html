@@ -28,8 +28,7 @@
         document.addEventListener('DOMContentLoaded', async () => {
             const tableBody = document.querySelector('#leaderboard-table tbody');
             try {
-                // Replace with your actual Koyeb API URL
-                const response = await axios.get('YOUR_KOYEB_API_URL/api/leaderboard');
+                const response = await axios.get('https://above-barbette-primellw-ba50ce72.koyeb.app/api/leaderboard');
                 const players = response.data;
                 
                 players.forEach((player, index) => {
